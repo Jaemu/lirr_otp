@@ -97,6 +97,20 @@
       .lirr-results-header-branch-text {
         text-align: center;
       }
+      .center {
+        text-align: center;
+      }
+      .lirr-results-start-over {
+        cursor: pointer;
+        background-color: #F0AF3F;
+        width: 10em;
+        margin: 0 auto;
+        border-radius: 50px;
+        box-shadow: 0 2px 5px;
+      }
+      .lirr-results-start-over:active {
+        box-shadow: inset 0 2px 5px;
+      }
     </style>
 <style id="fit-vids-style">.fluid-width-video-wrapper{width:100%;position:relative;padding:0;}.fluid-width-video-wrapper iframe,.fluid-width-video-wrapper object,.fluid-width-video-wrapper embed {position:absolute;top:0;left:0;width:100%;height:100%;}</style></head>
 <body>
@@ -8825,6 +8839,19 @@
           </h4>
         </div>
       </div>
+      <div class="lirr-results-body">
+        <p class="lirr-results-body-delay-text center">
+          Experienced <span class="lirr-results-body-delay-minutes">?</span> minutes of delays
+        </p>
+
+      </div>
+      <div class="lirr-results-date center">
+        <p class="lirr-results-date-text">Based on all twitter data from <span class="lirr-results-date-month"></span><span class="lirr-results-date-day"></span>, <span class="lirr-results-date-year"></span></p>
+      </div>
+      <div class="lirr-results-start-over center">
+        <p>Start Over</p>
+      </div>
+      
     </div>
 	</main>
 
@@ -8837,28 +8864,48 @@
 <script type="text/javascript" src="http://jillmunson.com/js/index.js"></script>
 <script>
   var Lirr = (function Lirr($){
+
       function init(){
       }
       function printLine(event) {
         console.log("Line: " + $(event.target.className));
       }
-      function showResults(event) {
+      function getBranchInfo(event) {
         var $target = $(event.target);
         var branchName = $target.data('display-name');
         $('.lirr-results-header-branch-name').text(branchName);
+        $.get('http://haiku.jillmunson.com/lirr', showResults);
+      }
+      function showResults(data) {
+        var result = data;
+        var branchKey = $('.lirr-results-header-branch-name').text().toLowerCase();
+        if(Object.keys(result).indexOf (branchKey) === -1){
+          $('.lirr-results-body-delay-minutes').text("0");
+        }
+        else {
+          $('.lirr-results-body-delay-minutes').text(result[branchKey]);
+        }
         $('.lirr-map').hide();
         $('.lirr-results').show();
       }
+      function reset(event) {
+        $('.lirr-map').show();
+        $('.lirr-results').hide();
+        $('.lirr-results-body-delay-minutes').text("?");
+      }
       return {
         init: init,
+        getBranchInfo: getBranchInfo,
         printLine: printLine,
+        reset: reset,
         showResults: showResults
       }
   }(jQuery || {}));
   $(document).ready(function ready(){
     Lirr.init();
   })
-  .on('click', '.lirr-line', Lirr.showResults);
+  .on('click', '.lirr-line', Lirr.getBranchInfo)
+  .on('click', '.lirr-results-start-over', Lirr.reset);
 </script>
   <script async="" src="//www.google-analytics.com/analytics.js"></script><script>
     (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
