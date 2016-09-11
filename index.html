@@ -12,7 +12,7 @@
     
 
   <title>
-     Haiku.py
+     LIRR Actual OTP
   </title>
 
     <meta name="description" content="A website to help you figure out what your branch's actual OTP was. We can promise it's probably not 99%">
@@ -45,7 +45,7 @@
         top:0px;
       }
       .site-wrapper {
-        background-color: #303E4D;
+        background-color: #fff;
       }
       .nav-title-lirr {
         color:#303E4D;
@@ -63,6 +63,9 @@
           padding: 0;
         }
       }
+      .lirr-map {
+        height: 50vh;
+      }
       .lirr-line {
         cursor: pointer;
       }
@@ -79,13 +82,6 @@
       .content {
         background-color: #fff;
       }
-    	.haiku-description {
-    		text-align: center;#ab9ba9;
-    	}
-    	.haiku-input-url{
-    		width:30em;
-    		margin:0 auto;
-    	}
       .site-footer {
         position: fixed;
         bottom:0;
@@ -93,6 +89,13 @@
       .site-footer {
         width: 100%;
         background-color: #000;
+      }
+      .lirr-results {
+        display: none;
+      }
+      .lirr-directive h4,
+      .lirr-results-header-branch-text {
+        text-align: center;
       }
     </style>
 <style id="fit-vids-style">.fluid-width-video-wrapper{width:100%;position:relative;padding:0;}.fluid-width-video-wrapper iframe,.fluid-width-video-wrapper object,.fluid-width-video-wrapper embed {position:absolute;top:0;left:0;width:100%;height:100%;}</style></head>
@@ -108,8 +111,8 @@
     </nav>
 	    <div class="vertical">
 	        <div class="main-header-content inner">
-	            <h1 class="lirr-page-title page-title">LIRR OTP Thunderdome</h1>
-              <h3 class="lirr-page-subtitle">Which LIRR branch had the objectively worst commute this year?</h3>
+	            <h1 class="lirr-page-title page-title">LIRR Literal Actual OTP</h1>
+              <h3 class="lirr-page-subtitle">How bad was your commute this year?</h3>
 	        </div>
 	    </div>
 	</header>
@@ -117,6 +120,9 @@
 
 	<main id="content" class="content" role="main">
     <div class="lirr-map">
+      <div class="lirr-directive">
+        <h4>Select your branch: </h4>
+      </div>
       <svg
    xmlns:dc="http://purl.org/dc/elements/1.1/"
    xmlns:cc="http://creativecommons.org/ns#"
@@ -187,7 +193,7 @@
    d="m 2997.6073,1712.415 0,-408.1874 104.2348,-100.2348 0,-84.8925 -316.2479,-453.38206 0,-78.36233 132.4696,-132.46965 0,-442.471221"
    id="path15674"
    inkscape:connector-curvature="0"
-   sodipodi:nodetypes="cccccccc" /><path class="lirr-line line-ronkonkoma" data-branch="ronkonkoma"
+   sodipodi:nodetypes="cccccccc" /><path class="lirr-line line-ronkonkoma" data-branch="ronkonkoma" data-display-name="Ronkonkoma"
    style="fill:none;stroke:#a626aa;stroke-width:44;stroke-linecap:round;stroke-linejoin:round;stroke-miterlimit:3.86369300000000004;stroke-opacity:1"
    inkscape:connector-curvature="0"
    id="path7549-0"
@@ -278,7 +284,7 @@
    d="m 3625.7454,1664.5127 v -32.832 h -59.712 v -15.5518 l 62.7842,-89.0879 h 13.8233 v 89.0879 h 18.6245 v 15.5518 h -18.6245 v 32.832 h -16.8955 z m 0,-48.3838 v -61.8452 l -43.1133,61.8452 h 43.1133 z"
    clip-rule="evenodd" />
   </g>
-<path class="lirr-line line-pt-washington" data-branch="port_washington"
+<path class="lirr-line line-pt-washington" data-branch="port_washington" data-display-name="Port Washington"
    style="fill:none;stroke:#c60c30;stroke-width:44;stroke-linecap:round;stroke-linejoin:round;stroke-miterlimit:3.863693;stroke-opacity:1"
    inkscape:connector-curvature="0"
    id="path7533"
@@ -297,14 +303,14 @@
    d="m 2054.1702,633.2396 c 26.6386,1.3193 48,23.17544 48,23.17544 l 480,479.99996 c 24,24 48,24 48,24"
    stroke-miterlimit="3.863693"
    clip-rule="evenodd"
-   sodipodi:nodetypes="ccsc" /><path class="lirr-line line-ronkonkoma" data-branch="ronkonkoma"
+   sodipodi:nodetypes="ccsc" /><path class="lirr-line line-ronkonkoma" data-branch="ronkonkoma" data-display-name="Ronkonkoma"
    style="fill:none;stroke:#a626aa;stroke-width:44;stroke-linecap:round;stroke-linejoin:round;stroke-miterlimit:3.863693;stroke-opacity:1"
    inkscape:connector-curvature="0"
    id="path7549-0-8"
    d="m 2677.1827,632.01197 -792.5613,0.40307"
    stroke-miterlimit="3.863693"
    clip-rule="evenodd"
-   sodipodi:nodetypes="cc" /><line
+   sodipodi:nodetypes="cc" /><line class="lirr-line line-montauk" data-branch="montauk" data-display-name="Montauk"
    style="fill:none;stroke:#006983;stroke-width:44;stroke-linecap:round;stroke-linejoin:round;stroke-miterlimit:3.86369300000000004;stroke-opacity:1"
    id="line7537"
    y2="1160.415"
@@ -312,7 +318,7 @@
    y1="1160.415"
    x1="2630.1702"
    stroke-miterlimit="3.863693"
-   clip-rule="evenodd" /><line
+   clip-rule="evenodd" /><line class="lirr-line line-babylon" data-branch="babylon" data-display-name="Babylon"
    style="fill:none;stroke:#00985f;stroke-width:44;stroke-linecap:round;stroke-linejoin:round;stroke-miterlimit:3.86369300000000004;stroke-opacity:1"
    id="line7541"
    y2="1160.415"
@@ -326,46 +332,46 @@
    id="path7543"
    d="m 1334.1702,1112.415 -48,48 c -48,48 -72,48 -72,48"
    stroke-miterlimit="3.863693"
-   clip-rule="evenodd" /><path
+   clip-rule="evenodd" /><path class="lirr-line line-long-beach" data-branch="long_beach" data-display-name="Long Beach"
    style="fill:none;stroke:#ff6319;stroke-width:44;stroke-linecap:round;stroke-linejoin:round;stroke-miterlimit:3.86369300000000004;stroke-opacity:1"
    inkscape:connector-curvature="0"
    id="path7545"
    d="m 1574.1702,1544.415 v -288 c 0,-48 -48,-48 -48,-48 h -312"
    stroke-miterlimit="3.863693"
-   clip-rule="evenodd" /><path class="lirr-line line-oyster-bay" data-branch="oyster_bay"
+   clip-rule="evenodd" /><path class="lirr-line line-oyster-bay" data-branch="oyster_bay" data-display-name="Oyster Bay"
    style="fill:none;stroke:#00af3f;stroke-width:44;stroke-linecap:round;stroke-linejoin:round;stroke-miterlimit:3.86369300000000004;stroke-opacity:1"
    inkscape:connector-curvature="0"
    id="path7547"
    d="m 1622.1702,104.41504 h -144 c -48,0 -48,48 -48,48 v 432 c 0,48 -48,48 -48,48"
    stroke-miterlimit="3.863693"
-   clip-rule="evenodd" /><path class="lirr-line line-huntington" data-branch="huntington"
+   clip-rule="evenodd" /><path class="lirr-line line-port-jefferson" data-branch="port_jefferson" data-display-name="Port Jefferson"
    style="fill:none;stroke:#0039a6;stroke-width:44;stroke-linecap:round;stroke-linejoin:round;stroke-miterlimit:3.863693;stroke-opacity:1"
    inkscape:connector-curvature="0"
    id="path7549"
    d="m 2726.1702,383.93194 -649.8658,0 c -94.0996,3.42875 -42.7723,251.15091 -190.1342,248.4831 l -912.00003,0"
    stroke-miterlimit="3.863693"
    clip-rule="evenodd"
-   sodipodi:nodetypes="cccc" /><path class="lirr-line line-belmont-park" data-branch="belmont_park"
+   sodipodi:nodetypes="cccc" /><path class="lirr-line line-belmont-park" data-branch="belmont_park" data-display-name="Belmont Park"
    style="fill:none;stroke:#990099;stroke-width:44;stroke-linecap:round;stroke-linejoin:round;stroke-miterlimit:3.863693"
    inkscape:connector-curvature="0"
    id="path7551"
    d="m 1022.1702,728.41504 v -48 c 0,-48 -48.00003,-48 -48.00003,-48"
    stroke-miterlimit="3.863693"
-   clip-rule="evenodd" /><path class="lirr-line line-hempstead" data-branch="hempstead"
+   clip-rule="evenodd" /><path class="lirr-line line-hempstead" data-branch="hempstead" data-display-name="Hempstead"
    style="fill:none;stroke:#ce8e00;stroke-width:44;stroke-linecap:round;stroke-linejoin:round;stroke-miterlimit:3.863693;stroke-opacity:1"
    inkscape:connector-curvature="0"
    id="path7553"
    d="m 662.17017,632.41504 312,0 c 0,0 24,0 48.00003,24 0,0 24,24 48,24 l 96,0 c 24,0 33.5962,-0.10084 44.2685,6.27519 10.7364,6.41435 30.0041,16.69274 46.4543,16.65814 10.1601,-0.0214 289.3193,-1.3193 289.3193,-1.3193"
    stroke-miterlimit="3.863693"
    clip-rule="evenodd"
-   sodipodi:nodetypes="cccssssc" /><path class="lirr-line line-far-rockaway" data-branch="far_rockaway"
+   sodipodi:nodetypes="cccssssc" /><path class="lirr-line line-far-rockaway" data-branch="far_rockaway" data-display-name="Far Rockaway"
    style="fill:none;stroke:#6e3219;stroke-width:44;stroke-linecap:round;stroke-linejoin:round;stroke-miterlimit:3.863693;stroke-opacity:1"
    inkscape:connector-curvature="0"
    id="path7555"
    d="m 1262.1702,1688.415 0,-432 c 0,-48 -48,-48 -48,-48 l -168,0 c -17.9088,0 -26.2522,-0.3673 -48.80002,0 -128.09167,1.6867 -135.83158,-478.65262 -301.41756,-479.99996 -13.44561,-0.50526 -33.78245,0 -33.78245,0"
    stroke-miterlimit="3.863693"
    clip-rule="evenodd"
-   sodipodi:nodetypes="cscsccc" /><path class="lirr-line line-west-hempstead" data-branch="west_hempstead" 
+   sodipodi:nodetypes="cscsccc" /><path class="lirr-line line-west-hempstead" data-branch="west_hempstead" data-display-name="West Hempstead"
    style="fill:none;stroke:#00a1de;stroke-width:44;stroke-linecap:round;stroke-linejoin:round;stroke-miterlimit:3.863693;stroke-opacity:1"
    inkscape:connector-curvature="0"
    id="path7557"
@@ -8811,6 +8817,15 @@
      y="1510.9119">Fare Zone</tspan></text>
 </svg>
     </div>
+    <div class="lirr-results">
+      <div class="lirr-results-header">
+        <div class="lirr-results-header-branch">
+          <h4 class="lirr-results-header-branch-text">
+            <span class="lirr-results-header-branch-name"></span> branch:
+          </h4>
+        </div>
+      </div>
+    </div>
 	</main>
 
     <footer class="site-footer clearfix">
@@ -8827,15 +8842,23 @@
       function printLine(event) {
         console.log("Line: " + $(event.target.className));
       }
+      function showResults(event) {
+        var $target = $(event.target);
+        var branchName = $target.data('display-name');
+        $('.lirr-results-header-branch-name').text(branchName);
+        $('.lirr-map').hide();
+        $('.lirr-results').show();
+      }
       return {
         init: init,
-        printLine: printLine
+        printLine: printLine,
+        showResults: showResults
       }
   }(jQuery || {}));
   $(document).ready(function ready(){
     Lirr.init();
   })
-  .on('click', '.line-huntington', Lirr.printLine);
+  .on('click', '.lirr-line', Lirr.showResults);
 </script>
   <script async="" src="//www.google-analytics.com/analytics.js"></script><script>
     (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
