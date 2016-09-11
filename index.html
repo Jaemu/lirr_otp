@@ -111,6 +111,9 @@
       .lirr-results-start-over:active {
         box-shadow: inset 0 2px 5px;
       }
+      .lirr-twitter {
+        color: #eaeaea;;
+      }
     </style>
 <style id="fit-vids-style">.fluid-width-video-wrapper{width:100%;position:relative;padding:0;}.fluid-width-video-wrapper iframe,.fluid-width-video-wrapper object,.fluid-width-video-wrapper embed {position:absolute;top:0;left:0;width:100%;height:100%;}</style></head>
 <body>
@@ -126,7 +129,7 @@
 	    <div class="vertical">
 	        <div class="main-header-content inner">
 	            <h1 class="lirr-page-title page-title">LIRR Literal Actual OTP</h1>
-              <h3 class="lirr-page-subtitle">How bad was your commute this year?</h3>
+              <h3 class="lirr-page-subtitle">How bad is your commute according to <a class="lirr-twitter" href="https://www.twitter.com/lirr">@LIRR</a>?</h3>
 	        </div>
 	    </div>
 	</header>
@@ -8841,12 +8844,14 @@
       </div>
       <div class="lirr-results-body">
         <p class="lirr-results-body-delay-text center">
-          Experienced <span class="lirr-results-body-delay-minutes">?</span> minutes of delays
+          Experienced <span class="lirr-results-body-delay-minutes">?</span> total minutes of delays
         </p>
-
+        <p class="lirr-results-body-cancellation-text center">
+          Experienced <span class="lirr-results-body-cancelled-trains">0</span> cancelled trains
+        </p>
       </div>
       <div class="lirr-results-date center">
-        <p class="lirr-results-date-text">Based on all twitter data from <span class="lirr-results-date-month"></span><span class="lirr-results-date-day"></span>, <span class="lirr-results-date-year"></span></p>
+        <p class="lirr-results-date-text">Based on all twitter data from <span class="lirr-results-date-month"></span> <span class="lirr-results-date-day"></span>, <span class="lirr-results-date-year"></span></p>
       </div>
       <div class="lirr-results-start-over center">
         <p>Start Over</p>
@@ -8864,7 +8869,20 @@
 <script type="text/javascript" src="http://jillmunson.com/js/index.js"></script>
 <script>
   var Lirr = (function Lirr($){
-
+      var months = [
+      "January",
+      "February",
+      "March",
+      "April",
+      "May",
+      "June",
+      "July",
+      "August",
+      "September",
+      "October",
+      "November",
+      "December"
+      ];
       function init(){
       }
       function printLine(event) {
@@ -8877,14 +8895,25 @@
         $.get('http://haiku.jillmunson.com/lirr', showResults);
       }
       function showResults(data) {
-        var result = data;
+        var delays = data['delays'];
+        var firstTweet = data['first'];
+        var cancellations = data['cancellations'];
         var branchKey = $('.lirr-results-header-branch-name').text().toLowerCase();
-        if(Object.keys(result).indexOf (branchKey) === -1){
+        if(Object.keys(delays).indexOf(branchKey) === -1){
           $('.lirr-results-body-delay-minutes').text("0");
         }
         else {
-          $('.lirr-results-body-delay-minutes').text(result[branchKey]);
+          $('.lirr-results-body-delay-minutes').text(delays[branchKey]);
         }
+        if(Object.keys(cancellations).indexOf(branchKey) === -1){
+          $('.lirr-results-body-cancelled-trains').text("0");
+        }
+        else {
+          $('.lirr-results-body-cancelled-trains').text(cancellations[branchKey]);
+        }
+        $('.lirr-results-date-month').text(months[parseInt(firstTweet['month']) - 1]);
+        $('.lirr-results-date-day').text(firstTweet['day']);
+        $('.lirr-results-date-year').text(firstTweet['year']);
         $('.lirr-map').hide();
         $('.lirr-results').show();
       }
