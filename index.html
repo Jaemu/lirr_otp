@@ -44,6 +44,9 @@
         position:absolute;
         top:0px;
       }
+      ul {
+        list-style: none;
+      }
       .site-wrapper {
         background-color: #fff;
       }
@@ -8850,6 +8853,11 @@
           Experienced <span class="lirr-results-body-cancelled-trains">0</span> cancelled trains
         </p>
       </div>
+      <div class="lirr-results-excuses center">
+        Probaby due to:
+        <ul class="lirr-results-excuses-list">
+        </ul>
+      </div>
       <div class="lirr-results-date center">
         <p class="lirr-results-date-text">Based on all twitter data from <span class="lirr-results-date-month"></span> <span class="lirr-results-date-day"></span>, <span class="lirr-results-date-year"></span></p>
       </div>
@@ -8898,6 +8906,7 @@
         var delays = data['delays'];
         var firstTweet = data['first'];
         var cancellations = data['cancellations'];
+        var excuses = data['excuses'];
         var branchKey = $('.lirr-results-header-branch-name').text().toLowerCase();
         if(Object.keys(delays).indexOf(branchKey) === -1){
           $('.lirr-results-body-delay-minutes').text("0");
@@ -8911,6 +8920,14 @@
         else {
           $('.lirr-results-body-cancelled-trains').text(cancellations[branchKey]);
         }
+        var index = 0;
+        var excusesList = $('.lirr-results-excuses-list').empty();
+        var excuse = $('<li class="lirr-results-excuse"></li>');
+        for(index; index < 5; index++){
+          var excuseIndex = Math.floor(Math.random() * excuses.length);
+          var newExcuse = excuse.clone().text(excuses[excuseIndex]);
+          excusesList.append(newExcuse);
+        } 
         $('.lirr-results-date-month').text(months[parseInt(firstTweet['month']) - 1]);
         $('.lirr-results-date-day').text(firstTweet['day']);
         $('.lirr-results-date-year').text(firstTweet['year']);
